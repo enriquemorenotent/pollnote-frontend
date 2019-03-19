@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const Navbar = () => (
 	<nav className="navbar" role="navigation" aria-label="main navigation">
@@ -28,9 +29,9 @@ const Navbar = () => (
 
 		<div id="navbarBasicExample" className="navbar-menu">
 			<div className="navbar-start">
-				<a href="/" className="navbar-item">
+				<Link className="navbar-item" to="/">
 					Home
-				</a>
+				</Link>
 
 				<a href="/" className="navbar-item">
 					Documentation
@@ -62,12 +63,9 @@ const Navbar = () => (
 			<div className="navbar-end">
 				<div className="navbar-item">
 					<div className="buttons">
-						<a href="/" className="button is-primary">
+						<Link className="button is-primary" to="/polls/new">
 							<strong>New poll</strong>
-						</a>
-						<a href="/" className="button is-light">
-							Log in
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

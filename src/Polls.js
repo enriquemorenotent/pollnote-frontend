@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import axios from "axios"
 
 const Polls = ({ lastUpdate, onDelete }) => {
@@ -37,18 +38,17 @@ const Polls = ({ lastUpdate, onDelete }) => {
 				) : (
 					<div className="content">
 						<p>Polls found: {polls.length}</p>
-						<p>
-							<ul>
-								{polls.map(item => (
-									<li className="poll" key={item.id}>
-										{item.title}{" "}
-										<a href="/" onClick={() => handleDelete(item.id)}>
-											Delete
-										</a>
-									</li>
-								))}
-							</ul>
-						</p>
+						<ul>
+							{polls.map(item => (
+								<li className="poll" key={item.id}>
+									<Link to={`/polls/${item.id}`}>{item.title}</Link> (
+									<a href="/" onClick={() => handleDelete(item.id)}>
+										Delete
+									</a>
+									)
+								</li>
+							))}
+						</ul>
 					</div>
 				)}
 			</div>
