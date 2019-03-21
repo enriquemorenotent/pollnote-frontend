@@ -15,7 +15,16 @@ const Poll = ({ match, history }) => {
 	return (
 		<div className="Poll">
 			<div className="container">
-				{poll ? <h1 className="is-size-1">{poll.title}</h1> : "Loading"}
+				{poll ? (
+					<div>
+						<h1 className="is-size-1">{poll.title}</h1>
+						{poll.options.map(x => (
+							<p key={x.id}>Option: {x.title}</p>
+						))}
+					</div>
+				) : (
+					"Loading"
+				)}
 			</div>
 		</div>
 	)

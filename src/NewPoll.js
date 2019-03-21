@@ -12,10 +12,16 @@ const NewPoll = ({ onSubmit }) => {
 	return (
 		<Route>
 			{({ history }) => {
+				const options = [{ title: "o1" }, { title: "o2" }]
 				const handleSubmit = () => {
-					axios.post("http://localhost:3000/polls", { title }).then(response => {
-						history.push("/")
-					})
+					axios
+						.post("http://localhost:3000/polls", {
+							poll: { title },
+							options
+						})
+						.then(response => {
+							history.push("/")
+						})
 				}
 
 				return (
@@ -35,6 +41,9 @@ const NewPoll = ({ onSubmit }) => {
 												onChange={handleChange}
 											/>
 										</div>
+									</div>
+									<div className="field has-text-danger">
+										<p>Manually added 2 options! Make this custom.</p>
 									</div>
 									<div className="field is-grouped">
 										<div className="control">
