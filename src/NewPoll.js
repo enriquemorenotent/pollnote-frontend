@@ -4,15 +4,23 @@ import axios from "axios"
 
 const NewPoll = ({ onSubmit }) => {
 	const [title, setTitle] = useState("")
+	const [options, setOptions] = useState([])
+	const [newOption, setNewOption] = useState("")
 
 	const handleChange = e => {
 		setTitle(e.target.value)
 	}
 
+	const handleKeyPress = e => {
+		if (e.key === "Enter") {
+			setOptions([...options, { title: e.target.value }])
+			setNewOption("")
+		}
+	}
+
 	return (
 		<Route>
 			{({ history }) => {
-				const options = [{ title: "o1" }, { title: "o2" }]
 				const handleSubmit = () => {
 					axios
 						.post("http://localhost:3000/polls", {
@@ -22,6 +30,9 @@ const NewPoll = ({ onSubmit }) => {
 						.then(response => {
 							history.push("/")
 						})
+						.catch((error, response) => {
+							console.log(error.response.data.title)
+						})
 				}
 
 				return (
@@ -30,6 +41,11 @@ const NewPoll = ({ onSubmit }) => {
 							<div className="columns">
 								<div className="column">
 									<h1 className="is-size-1">New poll</h1>
+									<div className="field">
+										<div className="notification is-danger">
+											TODO: Handle errors
+										</div>
+									</div>
 									<div className="field">
 										<label className="label">Name</label>
 										<div className="control">
@@ -42,8 +58,25 @@ const NewPoll = ({ onSubmit }) => {
 											/>
 										</div>
 									</div>
-									<div className="field has-text-danger">
-										<p>Manually added 2 options! Make this custom.</p>
+									<div className="field">
+										<h2 className="is-size-4">Options</h2>
+									</div>
+									<div className="field">
+										<ul>
+											{options.map((item, index) => (
+												<li key={index}>{item.title}</li>
+											))}
+										</ul>
+									</div>
+									<div className="field">
+										<input
+											className="input"
+											type="text"
+											placeholder="Add a new option"
+											value={newOption}
+											onChange={e => setNewOption(e.target.value)}
+											onKeyPress={handleKeyPress}
+										/>
 									</div>
 									<div className="field is-grouped">
 										<div className="control">
@@ -58,7 +91,6 @@ const NewPoll = ({ onSubmit }) => {
 											<button className="button is-text">Cancel</button>
 										</div>
 									</div>
-
 									<hr />
 								</div>
 							</div>
