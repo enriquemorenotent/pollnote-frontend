@@ -16,11 +16,16 @@ const Poll = ({ match, history }) => {
 		<div className="Poll">
 			<div className="container">
 				{poll ? (
-					<div>
-						<h1 className="is-size-1">{poll.title}</h1>
-						{poll.options.map(x => (
-							<p key={x.id}>Option: {x.title}</p>
-						))}
+					<div className="box">
+						<h1 className="is-size-1">Title: {poll.title}</h1>
+						<hr />
+						<div className="options buttons">
+							{poll.options.map(x => (
+								<button key={x.id} className="button is-fullwidth is-link">
+									{x.title} - {x.votes} votes
+								</button>
+							))}
+						</div>
 					</div>
 				) : (
 					"Loading"
