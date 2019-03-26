@@ -3,6 +3,7 @@ import axios from "axios"
 
 const Poll = ({ match, history }) => {
 	const [poll, setPoll] = useState(null)
+	const [voting, setVoting] = useState(false)
 
 	useEffect(() => {
 		axios("http://localhost:3000/polls/" + match.params.id)
@@ -12,19 +13,52 @@ const Poll = ({ match, history }) => {
 			.catch(error => history.push("/"))
 	}, [])
 
+	const handleVote = id => () => {
+		axios
+			.post(`http://localhost:3000/options/${id}/vote`)
+			.then(response => {
+				console.log(response)
+				return axios("http://localhost:3000/polls/" + match.params.id)
+			})
+			.then(response => {
+				setPoll(response.data)
+				setVoting(false)
+			})
+	}
+
 	return (
 		<div className="Poll">
 			<div className="container">
 				{poll ? (
 					<div className="box">
-						<h1 className="is-size-1">Title: {poll.title}</h1>
+						<h1 className="is-size-1">{poll.title}</h1>
 						<hr />
 						<div className="options buttons">
-							{poll.options.map(x => (
-								<button key={x.id} className="button is-fullwidth is-link">
-									{x.title} - {x.votes} votes
-								</button>
-							))}
+							{poll.options.map(option =>
+								voting ? (
+									<button
+										key={option.id}
+										className="button is-fullwidth is-link"
+										disabled
+									>
+										{" "}
+										Voting
+									</button>
+								) : (
+									<button
+										key={option.id}
+										className="button is-fullwidth is-link"
+										onClick={handleVote(option.id)}
+									>
+										{option.title} -{" "}
+										{
+											poll.votes.filter(vote => option.id === vote.option_id)
+												.length
+										}{" "}
+										votes
+									</button>
+								)
+							)}
 						</div>
 					</div>
 				) : (
