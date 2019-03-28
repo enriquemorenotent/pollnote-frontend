@@ -6,6 +6,7 @@ const NewPoll = ({ onSubmit }) => {
 	const [title, setTitle] = useState("")
 	const [options, setOptions] = useState([])
 	const [newOption, setNewOption] = useState("")
+	const [errors, setErrors] = useState(false)
 
 	const handleChange = e => {
 		setTitle(e.target.value)
@@ -30,8 +31,8 @@ const NewPoll = ({ onSubmit }) => {
 						.then(response => {
 							history.push("/")
 						})
-						.catch((error, response) => {
-							console.log(error.response.data.title)
+						.catch(error => {
+							setErrors(error.response.data)
 						})
 				}
 
@@ -41,11 +42,18 @@ const NewPoll = ({ onSubmit }) => {
 							<div className="columns">
 								<div className="column">
 									<h1 className="is-size-1">New poll</h1>
-									<div className="field">
-										<div className="notification is-danger">
-											TODO: Handle errors
+									{errors && (
+										<div className="field">
+											<div className="notification is-danger">
+												<h1 className="is-size-4">Errors found</h1>
+												<ul>
+													{errors.map((error, index) => (
+														<li key={index}>- {error}</li>
+													))}
+												</ul>
+											</div>
 										</div>
-									</div>
+									)}
 									<div className="field">
 										<label className="label">Name</label>
 										<div className="control">
