@@ -24,10 +24,15 @@ const NewPoll = ({ onSubmit }) => {
 			{({ history }) => {
 				const handleSubmit = () => {
 					axios
-						.post(`http://${process.env.REACT_APP_BACKEND_HOST}/polls`, {
-							poll: { title },
-							options
-						})
+						.post(
+							`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
+								process.env.REACT_APP_BACKEND_HOST
+							}/polls`,
+							{
+								poll: { title },
+								options
+							}
+						)
 						.then(response => {
 							history.push("/")
 						})

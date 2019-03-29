@@ -6,7 +6,11 @@ const Poll = ({ match, history }) => {
 	const [voting, setVoting] = useState(false)
 
 	useEffect(() => {
-		axios(`http://${process.env.REACT_APP_BACKEND_HOST}/polls/${match.params.id}`)
+		axios(
+			`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
+				process.env.REACT_APP_BACKEND_HOST
+			}/polls/${match.params.id}`
+		)
 			.then(response => {
 				setPoll(response.data)
 			})
@@ -15,11 +19,17 @@ const Poll = ({ match, history }) => {
 
 	const handleVote = id => () => {
 		axios
-			.post(`http://${process.env.REACT_APP_BACKEND_HOST}/options/${id}/vote`)
+			.post(
+				`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
+					process.env.REACT_APP_BACKEND_HOST
+				}/options/${id}/vote`
+			)
 			.then(response => {
 				console.log(response)
 				return axios(
-					`http://${process.env.REACT_APP_BACKEND_HOST}/polls/` + match.params.id
+					`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
+						process.env.REACT_APP_BACKEND_HOST
+					}/polls/` + match.params.id
 				)
 			})
 			.then(response => {
