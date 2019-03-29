@@ -24,7 +24,7 @@ const NewPoll = ({ onSubmit }) => {
 			{({ history }) => {
 				const handleSubmit = () => {
 					axios
-						.post("http://localhost:3000/polls", {
+						.post(`http://${process.env.REACT_APP_BACKEND_HOST}/polls`, {
 							poll: { title },
 							options
 						})

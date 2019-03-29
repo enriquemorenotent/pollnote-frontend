@@ -6,7 +6,7 @@ const Poll = ({ match, history }) => {
 	const [voting, setVoting] = useState(false)
 
 	useEffect(() => {
-		axios("http://localhost:3000/polls/" + match.params.id)
+		axios(`http://${process.env.REACT_APP_BACKEND_HOST}/polls/${match.params.id}`)
 			.then(response => {
 				setPoll(response.data)
 			})
@@ -15,10 +15,12 @@ const Poll = ({ match, history }) => {
 
 	const handleVote = id => () => {
 		axios
-			.post(`http://localhost:3000/options/${id}/vote`)
+			.post(`http://${process.env.REACT_APP_BACKEND_HOST}/options/${id}/vote`)
 			.then(response => {
 				console.log(response)
-				return axios("http://localhost:3000/polls/" + match.params.id)
+				return axios(
+					`http://${process.env.REACT_APP_BACKEND_HOST}/polls/` + match.params.id
+				)
 			})
 			.then(response => {
 				setPoll(response.data)

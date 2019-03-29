@@ -8,15 +8,17 @@ const Polls = ({ lastUpdate, onDelete }) => {
 
 	const handleDelete = id => {
 		console.log("handleDelete")
-		axios.delete(`http://localhost:3000/polls/${id}`, { id }).then(response => {
-			console.log(response)
+		axios
+			.delete(`http://${process.env.REACT_APP_BACKEND_HOST}/polls/${id}`, { id })
+			.then(response => {
+				console.log(response)
 
-			onDelete()
-		})
+				onDelete()
+			})
 	}
 
 	useEffect(() => {
-		axios("http://localhost:3000/polls").then(response => {
+		axios(`http://${process.env.REACT_APP_BACKEND_HOST}/polls`).then(response => {
 			setPolls(response.data)
 		})
 	}, [lastUpdate])
@@ -31,8 +33,6 @@ const Polls = ({ lastUpdate, onDelete }) => {
 		<div className="Polls">
 			<div className="container">
 				<h1 className="is-size-1">Polls</h1>
-				<div />
-
 				{loading ? (
 					"Loading"
 				) : (
