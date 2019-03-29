@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"
+import ReactChartkick, { LineChart, PieChart } from "react-chartkick"
+import Chart from "chart.js"
 import axios from "axios"
 
 const Poll = ({ match, history }) => {
@@ -41,41 +43,69 @@ const Poll = ({ match, history }) => {
 	return (
 		<div className="Poll">
 			<div className="container">
-				{poll ? (
-					<div className="box">
-						<h1 className="is-size-1">{poll.title}</h1>
-						<hr />
-						<div className="options buttons">
-							{poll.options.map(option =>
-								voting ? (
-									<button
-										key={option.id}
-										className="button is-fullwidth is-link"
-										disabled
-									>
-										{" "}
-										Voting
-									</button>
-								) : (
-									<button
-										key={option.id}
-										className="button is-fullwidth is-link"
-										onClick={handleVote(option.id)}
-									>
-										{option.title} -{" "}
-										{
-											poll.votes.filter(vote => option.id === vote.option_id)
-												.length
-										}{" "}
-										votes
-									</button>
-								)
+				<div className="column">
+					<h1 className="is-size-1">{poll && poll.title}</h1>
+				</div>
+				<div className="columns">
+					<div className="column is-two-thirds">
+						{poll ? (
+							<div className="box">
+								<h2 className="is-size-4">Options</h2>
+								<hr />
+								<div className="options buttons">
+									{poll.options.map(option =>
+										voting ? (
+											<button
+												key={option.id}
+												className="button is-fullwidth is-link"
+												disabled
+											>
+												{" "}
+												Voting
+											</button>
+										) : (
+											<button
+												key={option.id}
+												className="button is-fullwidth is-link"
+												onClick={handleVote(option.id)}
+											>
+												{option.title} -{" "}
+												{
+													poll.votes.filter(
+														vote => option.id === vote.option_id
+													).length
+												}{" "}
+												votes
+											</button>
+										)
+									)}
+								</div>
+							</div>
+						) : (
+							"Loading"
+						)}
+					</div>
+					<div className="column is-one-third">
+						<div className="box">
+							{poll && (
+								<>
+									<h2 className="is-size-4">Results</h2>
+									<hr />
+									<PieChart
+										data={[
+											...poll.options.map(option => [
+												option.title,
+												poll.votes.filter(
+													vote => option.id === vote.option_id
+												).length
+											])
+										]}
+									/>
+								</>
 							)}
 						</div>
 					</div>
-				) : (
-					"Loading"
-				)}
+				</div>
 			</div>
 		</div>
 	)
