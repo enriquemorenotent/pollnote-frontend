@@ -4,14 +4,7 @@ import { Link } from "react-router-dom"
 const Navbar = () => (
 	<nav className="navbar" role="navigation" aria-label="main navigation">
 		<div className="navbar-brand">
-			<a className="navbar-item" href="https://bulma.io">
-				<img
-					src="https://bulma.io/images/bulma-logo.png"
-					width="112"
-					height="28"
-					alt="logo"
-				/>
-			</a>
+			<div className="logo">Pollnote</div>
 
 			<a
 				href="/"
@@ -32,32 +25,6 @@ const Navbar = () => (
 				<Link className="navbar-item" to="/">
 					Home
 				</Link>
-
-				<a href="/" className="navbar-item">
-					Documentation
-				</a>
-
-				<div className="navbar-item has-dropdown is-hoverable">
-					<a href="/" className="navbar-link">
-						More
-					</a>
-
-					<div className="navbar-dropdown">
-						<a href="/" className="navbar-item">
-							About
-						</a>
-						<a href="/" className="navbar-item">
-							Jobs
-						</a>
-						<a href="/" className="navbar-item">
-							Contact
-						</a>
-						<hr className="navbar-divider" />
-						<a href="/" className="navbar-item">
-							Report an issue
-						</a>
-					</div>
-				</div>
 			</div>
 
 			<div className="navbar-end">
