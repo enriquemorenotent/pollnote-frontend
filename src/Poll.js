@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import ReactChartkick, { LineChart, PieChart } from "react-chartkick"
-import Chart from "chart.js"
 import axios from "axios"
+import PollResults from "./PollResults"
+
+let canVote
 
 const Poll = ({ match, history }) => {
 	const [poll, setPoll] = useState(null)
@@ -14,7 +15,8 @@ const Poll = ({ match, history }) => {
 			}/polls/${match.params.id}`
 		)
 			.then(response => {
-				setPoll(response.data)
+				canVote = response.data.canVote
+				setPoll(response.data.poll)
 			})
 			.catch(error => history.push("/"))
 	}, [])
@@ -27,7 +29,6 @@ const Poll = ({ match, history }) => {
 				}/options/${id}/vote`
 			)
 			.then(response => {
-				console.log(response)
 				return axios(
 					`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
 						process.env.REACT_APP_BACKEND_HOST
@@ -35,7 +36,8 @@ const Poll = ({ match, history }) => {
 				)
 			})
 			.then(response => {
-				setPoll(response.data)
+				canVote = response.data.canVote
+				setPoll(response.data.poll)
 				setVoting(false)
 			})
 	}
@@ -46,9 +48,12 @@ const Poll = ({ match, history }) => {
 				<div className="column">
 					<h1 className="is-size-1">{poll && poll.title}</h1>
 				</div>
-				<div className="columns">
-					<div className="column is-two-thirds">
-						{poll ? (
+
+				{!poll ? (
+					"Loading"
+				) : canVote ? (
+					<div className="columns">
+						<div className="column is-two-thirds">
 							<div className="box">
 								<h2 className="is-size-4">Options</h2>
 								<hr />
@@ -81,31 +86,11 @@ const Poll = ({ match, history }) => {
 									)}
 								</div>
 							</div>
-						) : (
-							"Loading"
-						)}
-					</div>
-					<div className="column is-one-third">
-						<div className="box">
-							{poll && (
-								<>
-									<h2 className="is-size-4">Results</h2>
-									<hr />
-									<PieChart
-										data={[
-											...poll.options.map(option => [
-												option.title,
-												poll.votes.filter(
-													vote => option.id === vote.option_id
-												).length
-											])
-										]}
-									/>
-								</>
-							)}
 						</div>
 					</div>
-				</div>
+				) : (
+					<PollResults data={poll} />
+				)}
 			</div>
 		</div>
 	)

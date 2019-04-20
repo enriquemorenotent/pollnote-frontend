@@ -5,7 +5,6 @@ import axios from "axios"
 const Poll = ({ data, onDelete }) => {
 	const handleDelete = e => {
 		e.preventDefault()
-		console.log("handleDelete")
 		axios
 			.delete(
 				`${process.env.REACT_APP_BACKEND_PROTOCOL}://${

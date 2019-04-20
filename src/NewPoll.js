@@ -4,19 +4,18 @@ import axios from "axios"
 
 const NewPoll = ({ onSubmit }) => {
 	const [title, setTitle] = useState("")
-	const [options, setOptions] = useState([])
-	const [newOption, setNewOption] = useState("")
+	const [options, setOptions] = useState(["", "", ""])
 	const [errors, setErrors] = useState(false)
 
-	const handleChange = e => {
+	const handleTitleChange = e => {
 		setTitle(e.target.value)
 	}
 
-	const handleKeyPress = e => {
-		if (e.key === "Enter") {
-			setOptions([...options, { title: e.target.value }])
-			setNewOption("")
-		}
+	const handleOptionChange = index => e => {
+		let newOptions = [...options]
+		newOptions[index] = e.target.value
+		if (newOptions[newOptions.length - 1] !== "") newOptions.push("")
+		setOptions(newOptions)
 	}
 
 	return (
@@ -30,7 +29,9 @@ const NewPoll = ({ onSubmit }) => {
 							}/polls`,
 							{
 								poll: { title },
-								options
+								options: options
+									.filter(item => item !== "")
+									.map(item => ({ title: item }))
 							}
 						)
 						.then(response => {
@@ -67,7 +68,7 @@ const NewPoll = ({ onSubmit }) => {
 												type="text"
 												placeholder="Text input"
 												value={title}
-												onChange={handleChange}
+												onChange={handleTitleChange}
 											/>
 										</div>
 									</div>
@@ -75,22 +76,22 @@ const NewPoll = ({ onSubmit }) => {
 										<h2 className="is-size-4">Options</h2>
 									</div>
 									<div className="field">
-										<ul>
-											{options.map((item, index) => (
-												<li key={index}>{item.title}</li>
-											))}
-										</ul>
+										{options.map((item, index) => (
+											<div className="field">
+												<div className="control">
+													<input
+														key={index}
+														className="input"
+														type="text"
+														placeholder="Add a new option"
+														value={item}
+														onChange={handleOptionChange(index)}
+													/>
+												</div>
+											</div>
+										))}
 									</div>
-									<div className="field">
-										<input
-											className="input"
-											type="text"
-											placeholder="Add a new option"
-											value={newOption}
-											onChange={e => setNewOption(e.target.value)}
-											onKeyPress={handleKeyPress}
-										/>
-									</div>
+									<div className="field" />
 									<div className="field is-grouped">
 										<div className="control">
 											<button
