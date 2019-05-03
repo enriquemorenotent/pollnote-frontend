@@ -34,8 +34,9 @@ const NewPoll = ({ onSubmit }) => {
 									.map(item => ({ title: item }))
 							}
 						)
-						.then(response => {
-							history.push("/")
+						.then(({ data }) => {
+							console.log(data.id)
+							history.push("/polls/" + data.id)
 						})
 						.catch(error => {
 							setErrors(error.response.data)
@@ -77,7 +78,7 @@ const NewPoll = ({ onSubmit }) => {
 									</div>
 									<div className="field">
 										{options.map((item, index) => (
-											<div className="field">
+											<div className="field" key={index}>
 												<div className="control">
 													<input
 														key={index}

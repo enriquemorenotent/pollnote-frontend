@@ -30,7 +30,7 @@ const Navbar = () => (
 			<div className="navbar-end">
 				<div className="navbar-item">
 					<div className="buttons">
-						<Link className="button is-primary" to="/polls/new">
+						<Link className="button is-primary" to="/">
 							<strong>New poll</strong>
 						</Link>
 					</div>

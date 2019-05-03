@@ -15,12 +15,12 @@ const App = () => {
 		<div className="App">
 			<Navbar />
 			<Switch>
-				<Route path="/polls/new">
-					<NewPoll onSubmit={handleSubmit} />
+				<Route path="/list">
+					<Polls onDelete={handleSubmit} lastUpdate={lastUpdate} />
 				</Route>
 				<Route path="/polls/:id" component={Poll} />
 				<Route>
-					<Polls onDelete={handleSubmit} lastUpdate={lastUpdate} />
+					<NewPoll onSubmit={handleSubmit} />
 				</Route>
 			</Switch>
 		</div>
