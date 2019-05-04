@@ -1,10 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+import "./NavBar.css"
+
 const Navbar = () => (
 	<nav className="navbar" role="navigation" aria-label="main navigation">
 		<div className="navbar-brand">
-			<div className="logo">Pollnote</div>
+			<a class="navbar-item" href="/">
+				<div className="logo">Pollnote</div>
+			</a>
 
 			<a
 				href="/"
@@ -22,8 +26,8 @@ const Navbar = () => (
 
 		<div id="navbarBasicExample" className="navbar-menu">
 			<div className="navbar-start">
-				<Link className="navbar-item" to="/">
-					Home
+				<Link className="navbar-item is-link" to="/list">
+					List
 				</Link>
 			</div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import Loader from "./Loader"
 
 const Poll = ({ data, onDelete }) => {
 	const handleDelete = e => {
@@ -54,7 +55,7 @@ const Polls = ({ lastUpdate, onDelete }) => {
 			<div className="container">
 				<h1 className="is-size-1">Polls</h1>
 				{loading ? (
-					"Loading"
+					<Loader />
 				) : (
 					<div className="content">
 						<p>Polls found: {polls.length}</p>
