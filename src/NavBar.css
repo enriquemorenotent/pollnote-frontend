@@ -3,10 +3,11 @@
 	color: white;
 }
 
-.navbar .navbar-item {
+.navbar .navbar-start .navbar-item,
+.navbar .logo {
 	color: white;
 }
-.navbar .navbar-item:hover {
+.navbar .navbar-start .navbar-item:hover {
 	background-color: #1c8f30;
 	color: white;
 }

@@ -6,7 +6,7 @@ import "./NavBar.css"
 const Navbar = () => (
 	<nav className="navbar" role="navigation" aria-label="main navigation">
 		<div className="navbar-brand">
-			<a class="navbar-item" href="/">
+			<a className="navbar-item" href="/">
 				<div className="logo">Pollnote</div>
 			</a>
 
@@ -34,8 +34,8 @@ const Navbar = () => (
 			<div className="navbar-end">
 				<div className="navbar-item">
 					<div className="buttons">
-						<Link className="button is-primary" to="/">
-							<strong>New poll</strong>
+						<Link className="button is-white" to="/">
+							New poll
 						</Link>
 					</div>
 				</div>

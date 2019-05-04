@@ -3,14 +3,11 @@ import { BarChart } from "react-chartkick"
 import Chart from "chart.js"
 
 const PollBarChart = ({ data }) => {
-	return (
-		<BarChart
-			data={data.options.map(option => [
-				option.title,
-				data.votes.filter(vote => option.id === vote.option_id).length
-			])}
-		/>
-	)
+	const chartData = data.options.map(option => [
+		option.title,
+		data.votes.filter(vote => option.id === vote.option_id).length
+	])
+	return <BarChart data={chartData} />
 }
 
 export default PollBarChart
