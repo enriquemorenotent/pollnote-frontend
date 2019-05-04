@@ -5,18 +5,12 @@ import {
 	TwitterShareButton,
 	TelegramShareButton,
 	WhatsappShareButton,
-	PinterestShareButton,
 	RedditShareButton,
-	TumblrShareButton,
-	EmailShareButton,
 	FacebookIcon,
 	TwitterIcon,
 	TelegramIcon,
 	WhatsappIcon,
-	PinterestIcon,
-	RedditIcon,
-	TumblrIcon,
-	EmailIcon
+	RedditIcon
 } from "react-share"
 
 import PollResults from "./PollResults"
