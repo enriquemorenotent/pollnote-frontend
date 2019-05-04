@@ -104,31 +104,35 @@ const Poll = ({ match, history }) => {
 								</div>
 								<div className="box">
 									<h4 className="is-size-5">Share:</h4>
+									{window.location.href}
 									<div className="share-icons">
-										<FacebookShareButton url={window.location.href}>
+										<FacebookShareButton
+											url={window.location.href}
+											quote={`Its pollnote time. ${poll.title}`}
+										>
 											<FacebookIcon size={40} round={false} />
 										</FacebookShareButton>
-										<TwitterShareButton url={window.location.href}>
+										<TwitterShareButton
+											url={window.location.href}
+											title={`Its pollnote time. ${poll.title}`}
+										>
 											<TwitterIcon size={40} round={false} />
 										</TwitterShareButton>
-										<TelegramShareButton url={window.location.href}>
+										<TelegramShareButton
+											url={window.location.href}
+											title={`Its pollnote time. ${poll.title}`}
+										>
 											<TelegramIcon size={40} round={false} />
 										</TelegramShareButton>
-										<WhatsappShareButton url={window.location.href}>
+										<WhatsappShareButton
+											url={window.location.href}
+											title={`Its pollnote time. ${poll.title}`}
+										>
 											<WhatsappIcon size={40} round={false} />
 										</WhatsappShareButton>
-										<PinterestShareButton url={window.location.href}>
-											<PinterestIcon size={40} round={false} />
-										</PinterestShareButton>
 										<RedditShareButton url={window.location.href}>
 											<RedditIcon size={40} round={false} />
 										</RedditShareButton>
-										<TumblrShareButton url={window.location.href}>
-											<TumblrIcon size={40} round={false} />
-										</TumblrShareButton>
-										<EmailShareButton url={window.location.href}>
-											<EmailIcon size={40} round={false} />
-										</EmailShareButton>
 									</div>
 								</div>
 							</div>
