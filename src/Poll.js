@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import {
-	FacebookShareButton,
-	TwitterShareButton,
-	TelegramShareButton,
-	WhatsappShareButton,
-	RedditShareButton,
-	FacebookIcon,
-	TwitterIcon,
-	TelegramIcon,
-	WhatsappIcon,
-	RedditIcon
-} from "react-share"
 
 import PollResults from "./PollResults"
+import ShareWidget from "./ShareWidget"
 
 import "./Poll.css"
 
@@ -73,8 +62,7 @@ const Poll = ({ match, history }) => {
 												<button
 													key={option.id}
 													className="button is-fullwidth is-link"
-													disabled
-												>
+													disabled>
 													{" "}
 													Voting
 												</button>
@@ -82,8 +70,7 @@ const Poll = ({ match, history }) => {
 												<button
 													key={option.id}
 													className="button is-fullwidth is-link"
-													onClick={handleVote(option.id)}
-												>
+													onClick={handleVote(option.id)}>
 													{option.title} -{" "}
 													{
 														poll.votes.filter(
@@ -96,39 +83,7 @@ const Poll = ({ match, history }) => {
 										)}
 									</div>
 								</div>
-								<div className="box">
-									<h4 className="is-size-5">Share:</h4>
-									{window.location.href}
-									<div className="share-icons">
-										<FacebookShareButton
-											url={window.location.href}
-											quote={`Its pollnote time. ${poll.title}`}
-										>
-											<FacebookIcon size={40} round={false} />
-										</FacebookShareButton>
-										<TwitterShareButton
-											url={window.location.href}
-											title={`Its pollnote time. ${poll.title}`}
-										>
-											<TwitterIcon size={40} round={false} />
-										</TwitterShareButton>
-										<TelegramShareButton
-											url={window.location.href}
-											title={`Its pollnote time. ${poll.title}`}
-										>
-											<TelegramIcon size={40} round={false} />
-										</TelegramShareButton>
-										<WhatsappShareButton
-											url={window.location.href}
-											title={`Its pollnote time. ${poll.title}`}
-										>
-											<WhatsappIcon size={40} round={false} />
-										</WhatsappShareButton>
-										<RedditShareButton url={window.location.href}>
-											<RedditIcon size={40} round={false} />
-										</RedditShareButton>
-									</div>
-								</div>
+								<ShareWidget title={poll.title} />
 							</div>
 						</div>
 					</>
