@@ -1,6 +1,6 @@
 import React from "react"
 import { BarChart } from "react-chartkick"
-import Chart from "chart.js"
+import "chart.js"
 
 const PollBarChart = ({ data }) => {
 	const chartData = data.options.map(option => [

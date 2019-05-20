@@ -9,3 +9,8 @@
 .Poll .share-icons > * {
 	margin: 0 20px 0 0;
 }
+
+.Poll .SingleChoice,
+.Poll .MultiChoice {
+	margin-top: 20px;
+}
