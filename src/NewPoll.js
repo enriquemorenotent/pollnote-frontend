@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import useReactRouter from "use-react-router"
 import axios from "axios"
 
-const NewPoll = ({ onSubmit }) => {
+const NewPoll = () => {
 	const [title, setTitle] = useState("")
 	const [options, setOptions] = useState(["", "", ""])
 	const [errors, setErrors] = useState(false)

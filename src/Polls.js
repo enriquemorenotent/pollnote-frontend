@@ -3,30 +3,23 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 import Loader from "./Loader"
 
+import "./Polls.scss"
+
+const baseUrl = `${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_HOST}`
+
 const Poll = ({ data, onDelete }) => {
 	const handleDelete = e => {
 		e.preventDefault()
 		axios
-			.delete(
-				`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
-					process.env.REACT_APP_BACKEND_HOST
-				}/polls/${data.id}`,
-				{ id: data.id }
-			)
-			.then(response => {
-				console.log(response)
-				onDelete(data.id)
-			})
+			.delete(`${baseUrl}/polls/${data.id}`, { id: data.id })
+			.then(response => onDelete(data.id))
 	}
 
 	return (
-		<li className="poll">
-			<Link to={`/polls/${data.id}`}>{data.title}</Link> (
-			<a href="/" onClick={handleDelete}>
-				Delete
-			</a>
-			)
-		</li>
+		<div className="poll">
+			<Link to={`/polls/${data.id}`}>{data.title}</Link>
+			<i className="fas fa-trash-alt" onClick={handleDelete} />
+		</div>
 	)
 }
 
@@ -59,11 +52,9 @@ const Polls = ({ lastUpdate, onDelete }) => {
 				) : (
 					<div className="content">
 						<p>Polls found: {polls.length}</p>
-						<ul>
-							{polls.map(item => (
-								<Poll data={item} onDelete={onDelete} key={item.id} />
-							))}
-						</ul>
+						{polls.map(item => (
+							<Poll data={item} onDelete={onDelete} key={item.id} />
+						))}
 					</div>
 				)}
 			</div>
