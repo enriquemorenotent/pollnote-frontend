@@ -22,14 +22,20 @@ const NewPoll = ({ onSubmit }) => {
 	}
 
 	const handleSubmit = () => {
+		console.log(options.filter(item => item !== ""))
 		axios
 			.post(
 				`${process.env.REACT_APP_BACKEND_PROTOCOL}://${
 					process.env.REACT_APP_BACKEND_HOST
 				}/polls`,
 				{
-					poll: { title, multichoice },
-					options: options.filter(item => item !== "").map(item => ({ title: item }))
+					poll: {
+						title,
+						multichoice,
+						options_attributes: options
+							.filter(item => item !== "")
+							.map(item => ({ title: item }))
+					}
 				}
 			)
 			.then(({ data }) => {
