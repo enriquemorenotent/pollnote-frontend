@@ -12,6 +12,8 @@ import {
 	RedditIcon
 } from "react-share"
 
+import "./ShareWidget.scss"
+
 const ShareWidget = ({ title }) => {
 	return (
 		<div className="ShareWidget">

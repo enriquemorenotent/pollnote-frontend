@@ -1,0 +1,28 @@
+.SingleChoiceForm {
+	.options {
+		margin-top: 60px;
+	}
+
+	.option {
+		display: block;
+		margin: 20px 0;
+		border: 1px solid #ccc;
+		padding: 10px;
+		border-radius: 4px;
+		box-shadow: 0 0 1px black;
+		cursor: pointer;
+		transition: box-shadow ease-in 0.1s;
+
+		&:hover {
+			box-shadow: 0 0 3px black;
+		}
+
+		input {
+			margin-right: 20px;
+		}
+	}
+
+	.button.is-success {
+		background-color: #449848;
+	}
+}

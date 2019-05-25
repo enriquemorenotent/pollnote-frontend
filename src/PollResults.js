@@ -3,6 +3,7 @@ import PollPieChart from "./PollPieChart"
 import PollBarChart from "./PollBarChart"
 
 const PollResults = ({ data }) => {
+	console.log("Pollresults", data)
 	return (
 		<div className="PollResults">
 			<div className="container">

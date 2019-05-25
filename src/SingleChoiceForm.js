@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import "./SingleChoiceForm.scss"
+
 const SingleChoiceForm = ({ data, onVote }) => {
 	const [choice, setChoice] = useState(null)
 
@@ -11,24 +13,21 @@ const SingleChoiceForm = ({ data, onVote }) => {
 
 	return (
 		<div className="SingleChoiceForm m-t-30">
-			{data.options.map(item => (
-				<div className="field" key={item.id}>
-					<div className="control">
-						<label className="radio">
-							<input
-								type="radio"
-								checked={item.id === choice}
-								onChange={handleChange(item.id)}
-							/>{" "}
-							{item.title} -{" "}
-							{data.votes.filter(vote => item.id === vote.item_id).length} votes
-						</label>
-					</div>
-				</div>
-			))}
+			<div className="options">
+				{data.options.map(item => (
+					<label className="option" key={item.id}>
+						<input
+							type="radio"
+							checked={item.id === choice}
+							onChange={handleChange(item.id)}
+						/>
+						Option
+					</label>
+				))}
+			</div>
 			<div className="field is-grouped is-grouped-right">
 				<div className="control">
-					<button className="button is-link" onClick={handleSubmit}>
+					<button className="button is-success" onClick={handleSubmit}>
 						Submit
 					</button>
 				</div>
