@@ -9,7 +9,7 @@ import "./Poll.css"
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_HOST}`
 
-const Poll = ({}) => {
+const Poll = () => {
 	const [data, setData] = useState(null)
 	const { history, match } = useReactRouter()
 
