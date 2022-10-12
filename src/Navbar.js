@@ -16,8 +16,7 @@ const Navbar = () => (
 				className="navbar-burger burger"
 				aria-label="menu"
 				aria-expanded="false"
-				data-target="navbarBasicExample"
-			>
+				data-target="navbarBasicExample">
 				<span aria-hidden="true" />
 				<span aria-hidden="true" />
 				<span aria-hidden="true" />
@@ -27,7 +26,7 @@ const Navbar = () => (
 		<div id="navbarBasicExample" className="navbar-menu">
 			<div className="navbar-start">
 				<Link className="navbar-item is-link" to="/list">
-					List
+					List all polls
 				</Link>
 			</div>
 
