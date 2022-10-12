@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fcc0d9da-34f4-489a-a0cc-84a31d8b74cb/deploy-status)](https://app.netlify.com/sites/pollnote/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
